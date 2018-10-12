@@ -4,7 +4,7 @@ if !exists('g:ex_easyhl_auto_cursorhl')
     let g:ex_easyhl_auto_cursorhl = 0
 endif
 
-let s:hl_reg_map = ["","q","w","e","r"]
+let s:hl_reg_map = ["","q","w","e","r","t","y","u","i","o"]
 " }}}
 
 " functions {{{1
@@ -53,10 +53,10 @@ endfunction
 " s:init_hl_vars {{{2
 function! s:init_hl_vars()
     if !exists('w:ex_hl_match_ids')
-        let w:ex_hl_match_ids = [0,0,0,0,0]
+        let w:ex_hl_match_ids = [0,0,0,0,0,0,0,0,0,0]
     endif
     if !exists('w:ex_hl_text')
-        let w:ex_hl_text = ["","","","",""]
+        let w:ex_hl_text = ["","","","","","","","","",""]
     endif
 endfunction
 
@@ -72,7 +72,7 @@ endfunction
 
 " s:check_match_nr {{{2
 function! s:check_match_nr(match_nr)
-    if a:match_nr != 1 && a:match_nr != 2 && a:match_nr != 3 && a:match_nr != 4 
+    if a:match_nr != 1 && a:match_nr != 2 && a:match_nr != 3 && a:match_nr != 4 && a:match_nr != 5 && a:match_nr != 6 && a:match_nr != 7 && a:match_nr != 8 && a:match_nr != 9 
         echohl ErrorMsg
         echomsg 'Error: Invalid argument ' . a:match_nr
         echohl None
@@ -180,6 +180,11 @@ function! s:hl_cancel(match_nr)
         call s:reset_hl_vars(2)
         call s:reset_hl_vars(3)
         call s:reset_hl_vars(4)
+        call s:reset_hl_vars(5)
+        call s:reset_hl_vars(6)
+        call s:reset_hl_vars(7)
+        call s:reset_hl_vars(8)
+        call s:reset_hl_vars(9)
     else
         if s:check_match_nr(a:match_nr) == 0
             return
@@ -192,10 +197,15 @@ endfunction
 
 " syntax highlight {{{1 
 hi default EX_HL_cursorhl gui=none guibg=white term=none cterm=none ctermbg=white 
-hi default EX_HL_label1 gui=none guibg=lightcyan term=none cterm=none ctermbg=lightcyan
+hi default EX_HL_label1 gui=none guibg=lightcyan    term=none cterm=none ctermbg=lightcyan
 hi default EX_HL_label2 gui=none guibg=lightmagenta term=none cterm=none ctermbg=lightmagenta
-hi default EX_HL_label3 gui=none guibg=lightred term=none cterm=none ctermbg=lightred
-hi default EX_HL_label4 gui=none guibg=lightgreen term=none cterm=none ctermbg=lightgreen
+hi default EX_HL_label3 gui=none guibg=lightred     term=none cterm=none ctermbg=lightred
+hi default EX_HL_label4 gui=none guibg=lightgreen   term=none cterm=none ctermbg=lightgreen
+hi default EX_HL_label5 gui=none guibg=DarkCyan     term=none cterm=none ctermbg=DarkCyan  
+hi default EX_HL_label6 gui=none guibg=Magenta      term=none cterm=none ctermbg=Magenta   
+hi default EX_HL_label7 gui=none guibg=Brown        term=none cterm=none ctermbg=Brown     
+hi default EX_HL_label8 gui=none guibg=Green        term=none cterm=none ctermbg=Green     
+hi default EX_HL_label9 gui=none guibg=Red          term=none cterm=none ctermbg=Red       
 " }}}1
 
 " autocmd {{{1
@@ -217,6 +227,11 @@ command! -narg=? HL1 call <SID>hl_text(1, '<args>')
 command! -narg=? HL2 call <SID>hl_text(2, '<args>')
 command! -narg=? HL3 call <SID>hl_text(3, '<args>')
 command! -narg=? HL4 call <SID>hl_text(4, '<args>')
+command! -narg=? HL5 call <SID>hl_text(5, '<args>')
+command! -narg=? HL6 call <SID>hl_text(6, '<args>')
+command! -narg=? HL7 call <SID>hl_text(7, '<args>')
+command! -narg=? HL8 call <SID>hl_text(8, '<args>')
+command! -narg=? HL9 call <SID>hl_text(9, '<args>')
 " }}}1
 
 " default mappings {{{1
@@ -242,11 +257,21 @@ if !exists("g:easyhl_no_mappings") || !g:easyhl_no_mappings
             nnoremap <unique> <silent> <M-2> :EasyhlWord 2<CR>
             nnoremap <unique> <silent> <M-3> :EasyhlWord 3<CR>
             nnoremap <unique> <silent> <M-4> :EasyhlWord 4<CR>
+            nnoremap <unique> <silent> <M-5> :EasyhlWord 5<CR>
+            nnoremap <unique> <silent> <M-6> :EasyhlWord 6<CR>
+            nnoremap <unique> <silent> <M-7> :EasyhlWord 7<CR>
+            nnoremap <unique> <silent> <M-8> :EasyhlWord 8<CR>
+            nnoremap <unique> <silent> <M-9> :EasyhlWord 9<CR>
 
             vnoremap <unique> <silent> <M-1> :EasyhlRange 1<CR>
             vnoremap <unique> <silent> <M-2> :EasyhlRange 2<CR>
             vnoremap <unique> <silent> <M-3> :EasyhlRange 3<CR>
             vnoremap <unique> <silent> <M-4> :EasyhlRange 4<CR>
+            vnoremap <unique> <silent> <M-5> :EasyhlRange 5<CR>
+            vnoremap <unique> <silent> <M-6> :EasyhlRange 6<CR>
+            vnoremap <unique> <silent> <M-7> :EasyhlRange 7<CR>
+            vnoremap <unique> <silent> <M-8> :EasyhlRange 8<CR>
+            vnoremap <unique> <silent> <M-9> :EasyhlRange 9<CR>
 
             nnoremap <unique> <silent> <M-0> :EasyhlCancel 0<CR>
         endif
@@ -255,20 +280,35 @@ if !exists("g:easyhl_no_mappings") || !g:easyhl_no_mappings
         nnoremap <unique> <silent> <leader>h2 :EasyhlWord 2<CR>
         nnoremap <unique> <silent> <leader>h3 :EasyhlWord 3<CR>
         nnoremap <unique> <silent> <leader>h4 :EasyhlWord 4<CR>
+        nnoremap <unique> <silent> <leader>h5 :EasyhlWord 5<CR>
+        nnoremap <unique> <silent> <leader>h6 :EasyhlWord 6<CR>
+        nnoremap <unique> <silent> <leader>h7 :EasyhlWord 7<CR>
+        nnoremap <unique> <silent> <leader>h8 :EasyhlWord 8<CR>
+        nnoremap <unique> <silent> <leader>h9 :EasyhlWord 9<CR>
 
         vnoremap <unique> <silent> <leader>h1 :EasyhlRange 1<CR>
         vnoremap <unique> <silent> <leader>h2 :EasyhlRange 2<CR>
         vnoremap <unique> <silent> <leader>h3 :EasyhlRange 3<CR>
         vnoremap <unique> <silent> <leader>h4 :EasyhlRange 4<CR>
+        vnoremap <unique> <silent> <leader>h5 :EasyhlRange 5<CR>
+        vnoremap <unique> <silent> <leader>h6 :EasyhlRange 6<CR>
+        vnoremap <unique> <silent> <leader>h7 :EasyhlRange 7<CR>
+        vnoremap <unique> <silent> <leader>h8 :EasyhlRange 8<CR>
+        vnoremap <unique> <silent> <leader>h9 :EasyhlRange 9<CR>
 
         nnoremap <unique> <silent> <leader>h0 :EasyhlCancel 0<CR>
     endif
 
-    nnoremap <unique> <silent> <Leader>0 :EasyhlCancel 0<CR>
-    nnoremap <unique> <silent> <Leader>1 :EasyhlCancel 1<CR>
-    nnoremap <unique> <silent> <Leader>2 :EasyhlCancel 2<CR>
-    nnoremap <unique> <silent> <Leader>3 :EasyhlCancel 3<CR>
-    nnoremap <unique> <silent> <Leader>4 :EasyhlCancel 4<CR>
+    nnoremap <unique> <silent> <Leader>c0 :EasyhlCancel 0<CR>
+    nnoremap <unique> <silent> <Leader>c1 :EasyhlCancel 1<CR>
+    nnoremap <unique> <silent> <Leader>c2 :EasyhlCancel 2<CR>
+    nnoremap <unique> <silent> <Leader>c3 :EasyhlCancel 3<CR>
+    nnoremap <unique> <silent> <Leader>c4 :EasyhlCancel 4<CR>
+    nnoremap <unique> <silent> <Leader>c5 :EasyhlCancel 5<CR>
+    nnoremap <unique> <silent> <Leader>c6 :EasyhlCancel 6<CR>
+    nnoremap <unique> <silent> <Leader>c7 :EasyhlCancel 7<CR>
+    nnoremap <unique> <silent> <Leader>c8 :EasyhlCancel 8<CR>
+    nnoremap <unique> <silent> <Leader>c9 :EasyhlCancel 9<CR>
 
     nnoremap <unique> <silent><leader>sub :%s/<c-r>q/<c-r>w/g<CR><c-o>
     vnoremap <unique> <silent><leader>sub  :s/<c-r>q/<c-r>w/g<CR><c-o>
